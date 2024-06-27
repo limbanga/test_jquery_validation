@@ -8,33 +8,86 @@
 </head>
 
 <body>
-  <form class="cmxform" id="commentForm" method="get" action="" novalidate>
-    <fieldset>
-      <legend>Please provide your name, email address (won't be published) and a comment</legend>
-      <p>
-        <label for="cname">Name (required, at least 2 characters)</label>
-        <input id="cname" name="name" minlength="2" type="text" required>
-      </p>
-      <p>
-        <label for="cemail">E-Mail (required)</label>
-        <input id="cemail" type="email" name="email" required>
-      </p>
-      <p>
-        <label for="curl">URL (optional)</label>
-        <input id="curl" type="url" name="url">
-      </p>
-      <p>
-        <label for="ccomment">Your comment (required)</label>
-        <textarea id="ccomment" name="comment" required></textarea>
-      </p>
-      <p>
-        <input class="submit" type="submit" value="Submit">
-      </p>
-    </fieldset>
-  </form>
+
+  <main>
+
+    <form class="cmxform" id="commentForm" method="get" action="" novalidate>
+      <fieldset>
+        <legend>Please provide your name, email address (won't be published) and a comment</legend>
+        <p>
+          <label for="cname">Name (required, at least 2 characters)</label>
+          <input id="cname" name="name" minlength="2" type="text" required>
+        </p>
+        <p>
+          <label for="cemail">E-Mail (required)</label>
+          <input id="cemail" type="email" name="email" required>
+        </p>
+        <p>
+          <label for="curl">URL (optional)</label>
+          <input id="curl" type="url" name="url">
+        </p>
+        <p>
+          <label for="ccomment">Your comment (required)</label>
+          <textarea id="ccomment" name="comment" required></textarea>
+        </p>
+        <p>
+          <input class="submit" type="submit" value="Submit">
+        </p>
+      </fieldset>
+
+    </form>
+
+    <button type="button" onclick="isFormValid()">
+      Check form is valid
+    </button>
+  </main>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
   <script>
-    $("#commentForm").validate();
+    $.validator.setDefaults({
+      // debug: true,
+      success: 'valid',
+      errorClass: 'text-danger',
+    });
+    $("#commentForm").validate(
+      {
+        rules: {
+          name: {
+            required: true,
+            minlength: 2
+          },
+          email: {
+            required: true,
+            email: true
+          },
+          comment: {
+            required: true
+          }
+        },
+        messages: {
+          name: {
+            required: "Please enter your name",
+            minlength: "Your name must consist of at least 2 characters"
+          },
+          email: {
+            required: "Please enter your email",
+            email: "Please enter a valid email"
+          },
+          comment: {
+            required: "Please enter your comment"
+          }
+        }
+      }
+    );
+
+    function isFormValid() {
+      console.log($("#commentForm").valid())
+    }
   </script>
+
 </body>
 
 </html>
