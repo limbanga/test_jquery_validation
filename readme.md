@@ -1,0 +1,3 @@
+# Test jquery validation
+
+ok :")
