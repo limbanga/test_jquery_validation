@@ -1,3 +1,13 @@
-.text_sm {
+.validation_massage {
     font-size: 0.8em;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
